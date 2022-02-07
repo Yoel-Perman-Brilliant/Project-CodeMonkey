@@ -1,18 +1,17 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.spikes2212.command.drivetrains.TankDrivetrain;
-import com.spikes2212.control.FeedForwardSettings;
 import com.spikes2212.control.PIDSettings;
 import com.spikes2212.dashboard.Namespace;
 import com.spikes2212.dashboard.RootNamespace;
-import com.spikes2212.util.PigeonWrapper;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.RobotMap;
 import frc.robot.utils.BustedMotorControllerGroup;
+
 import java.util.function.Supplier;
 
 public class Drivetrain extends TankDrivetrain {
@@ -29,10 +28,8 @@ public class Drivetrain extends TankDrivetrain {
 
     private static final RootNamespace rootNamespace = new RootNamespace("drivetrain");
     private static final Namespace encoderNamespace = rootNamespace.addChild("encoders");
-        private static final Namespace pigeonNamespace = rootNamespace.addChild("pigeon");
     private static final Namespace GyroPIDNamespace = rootNamespace.addChild("Gyro PID");
     private static final Namespace drivetrainPIDNamespace = rootNamespace.addChild("drivetrain PID");
-    private static final Namespace FeedForwardNamespace = rootNamespace.addChild("feed forward");
 
     /**
      * One side of the robot is faster than the other. To solve this we slow down one of the sides.
@@ -40,13 +37,13 @@ public class Drivetrain extends TankDrivetrain {
     private static final Supplier<Double> rightCorrection = rootNamespace.addConstantDouble("right correction", 1);
     private static final Supplier<Double> leftCorrection = rootNamespace.addConstantDouble("left correction", 1);
 
-    private final PigeonWrapper pigeon;
     private final Encoder leftEncoder, rightEncoder;
+    private final ADXRS450_Gyro gyro;
 
     private final Supplier<Double> gyroKp = GyroPIDNamespace.addConstantDouble("gyro kP", 0);
     private final Supplier<Double> gyroKi = GyroPIDNamespace.addConstantDouble("gyro kI", 0);
     private final Supplier<Double> gyroKd = GyroPIDNamespace.addConstantDouble("gyro kD", 0);
-    private final Supplier<Double> gyroTolerance = GyroPIDNamespace.addConstantDouble("gyro tolerance", 0);
+    private final Supplier<Double> gyroTolerance = GyroPIDNamespace.addConstantDouble("gyro tolerance", 5);
     private final Supplier<Double> gyroWaitTime = GyroPIDNamespace.addConstantDouble("gyro wait time", 0);
     private final PIDSettings gyroPIDSettings;
 
@@ -57,42 +54,34 @@ public class Drivetrain extends TankDrivetrain {
     private final Supplier<Double> drivetrainWaitTime = drivetrainPIDNamespace.addConstantDouble("drivetrain wait time", 0);
     private final PIDSettings drivetrainPIDSettings;
 
-    private final Supplier<Double> kV = FeedForwardNamespace.addConstantDouble("kV", 0);
-    private final Supplier<Double> kS = FeedForwardNamespace.addConstantDouble("kS", 0);
-    private final Supplier<Double> kA = FeedForwardNamespace.addConstantDouble("kA", 0);
-    private final FeedForwardSettings ffSettings;
-
     public static Drivetrain getInstance() {
         if (instance == null) {
-            WPI_TalonSRX pigeonTalon = new WPI_TalonSRX(RobotMap.CAN.PIGEON_TALON);
             instance = new Drivetrain(new BustedMotorControllerGroup(
                     leftCorrection,
-                    pigeonTalon, // @TODO: If you change the pigeon talon change this as well
+                    new WPI_TalonSRX(RobotMap.CAN.DRIVETRAIN_RIGHT_TALON_1),
                     new WPI_TalonSRX(RobotMap.CAN.DRIVETRAIN_LEFT_TALON_2)
             ),
                     new BustedMotorControllerGroup(
                             rightCorrection,
                             new WPI_TalonSRX(RobotMap.CAN.DRIVETRAIN_RIGHT_TALON_1),
                             new WPI_TalonSRX(RobotMap.CAN.DRIVETRAIN_RIGHT_TALON_2)
-                    ),
-                    pigeonTalon
+                    )
             );
         }
         return instance;
     }
 
-    private Drivetrain(MotorControllerGroup leftMotors, BustedMotorControllerGroup rightMotors, WPI_TalonSRX pigeonTalon) {
+    private Drivetrain(MotorControllerGroup leftMotors, BustedMotorControllerGroup rightMotors) {
         super(leftMotors, rightMotors);
-        this.pigeon = new PigeonWrapper(pigeonTalon);
         this.leftEncoder = new Encoder(RobotMap.DIO.DRIVETRAIN_LEFT_ENCODER_POS, RobotMap.DIO.DRIVETRAIN_LEFT_ENCODER_NEG);
         this.rightEncoder = new Encoder(RobotMap.DIO.DRIVETRAIN_RIGHT_ENCODER_POS, RobotMap.DIO.DRIVETRAIN_RIGHT_ENCODER_NEG);
+        this.gyro = new ADXRS450_Gyro();
         this.leftEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
         this.rightEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
         this.gyroPIDSettings = new PIDSettings(this.gyroKp, this.gyroKi, this.gyroKd, this.gyroTolerance,
                 this.gyroWaitTime);
         this.drivetrainPIDSettings = new PIDSettings(this.drivetrainKp, this.drivetrainKi, this.drivetrainKd,
                 this.drivetrainTolerance, this.drivetrainWaitTime);
-        this.ffSettings = new FeedForwardSettings(this.kS, this.kV, this.kA);
     }
 
     public void resetEncoders() {
@@ -105,27 +94,19 @@ public class Drivetrain extends TankDrivetrain {
         rootNamespace.update();
     }
 
-    public double getYaw() {
-        double yaw = pigeon.getYaw() % 360;
-        if (yaw > 180) yaw -= 360;
-        if (yaw < -180) yaw += 360;
-        return yaw;
+    public double getAngle() {
+        double angle = gyro.getAngle() % 360;
+        if (angle > 180) angle -= 360;
+        if (angle < -180) angle += 360;
+        return angle;
     }
 
     public double getRightDistance() {
         return rightEncoder.getDistance();
     }
 
-    public double getRightTicks() {
-        return rightEncoder.get();
-    }
-
     public double getLeftDistance() {
         return leftEncoder.getDistance();
-    }
-
-    public double getLeftTicks() {
-        return leftEncoder.get();
     }
 
     /**
@@ -137,14 +118,6 @@ public class Drivetrain extends TankDrivetrain {
         encoderNamespace.putNumber("left distance", leftEncoder::getDistance);
         encoderNamespace.putNumber("right distance", rightEncoder::getDistance);
         encoderNamespace.putData("reset encoders", new InstantCommand(this::resetEncoders) {
-            @Override
-            public boolean runsWhenDisabled() {
-                return true;
-            }
-        });
-
-        pigeonNamespace.putNumber("yaw", this::getYaw);
-        pigeonNamespace.putData("reset pigeon", new InstantCommand(pigeon::reset) {
             @Override
             public boolean runsWhenDisabled() {
                 return true;

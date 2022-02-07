@@ -7,7 +7,7 @@ import com.spikes2212.command.drivetrains.commands.DriveTankWithPID;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Drivetrain;
 
-public abstract class ProgramBase extends SequentialCommandGroup {
+public class ProgramBase extends SequentialCommandGroup {
 
     private final Drivetrain drivetrain = Drivetrain.getInstance();
 
@@ -31,13 +31,13 @@ public abstract class ProgramBase extends SequentialCommandGroup {
 
     protected void turnLeftInAngle(double angle) {
         addCommands(
-            new DriveArcadeWithPID(drivetrain, drivetrain::getYaw, angle, 0.0, drivetrain.getGyroPIDSettings())
+            new DriveArcadeWithPID(drivetrain, drivetrain::getAngle, angle, 0.0, drivetrain.getGyroPIDSettings())
         );
     }
 
     protected void turnRightInAngle(double angle) {
         addCommands(
-            new DriveArcadeWithPID(drivetrain, drivetrain::getYaw, -angle, 0.0, drivetrain.getGyroPIDSettings())
+            new DriveArcadeWithPID(drivetrain, drivetrain::getAngle, -angle, 0.0, drivetrain.getGyroPIDSettings())
         );
     }
 
