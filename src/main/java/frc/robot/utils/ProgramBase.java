@@ -23,18 +23,18 @@ public class ProgramBase extends SequentialCommandGroup {
     }
 
     protected void turnLeftInAngle(double angle) {
-        addCommands(new TurnInAngle(drivetrain, angle));
+        addCommands(new TurnInAngle(drivetrain, angle, true));
     }
 
     protected void turnRightInAngle(double angle) {
-        addCommands(new TurnInAngle(drivetrain, -angle));
+        addCommands(new TurnInAngle(drivetrain, -angle, false));
     }
 
     protected void turnLeftInSeconds(double seconds) {
-        addCommands(new DriveArcade(drivetrain, 0, Drivetrain.ROTATE_SPEED).withTimeout(seconds));
+        addCommands(new DriveArcade(drivetrain, 0, Drivetrain.DEFAUlT_ROTATE_SPEED).withTimeout(seconds));
     }
 
     protected void turnRightInSeconds(double seconds) {
-        addCommands(new DriveArcade(drivetrain, 0, -Drivetrain.ROTATE_SPEED).withTimeout(seconds));
+        addCommands(new DriveArcade(drivetrain, 0, -Drivetrain.DEFAUlT_ROTATE_SPEED).withTimeout(seconds));
     }
 }
