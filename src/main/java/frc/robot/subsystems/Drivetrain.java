@@ -30,7 +30,7 @@ public class Drivetrain extends TankDrivetrain {
     private final ADXRS450_Gyro gyro = new ADXRS450_Gyro(); //todo change to *your* gyro type
 
     public static final double DRIVE_SPEED = 0.5;
-    public static final double DEFAUlT_ROTATE_SPEED = 0.45;
+    public static final double DEFAULT_ROTATE_SPEED = 0.45;
     public static final double DEFAULT_ROTATE_TOLERANCE = 3;
 
     private static Drivetrain instance;
@@ -42,7 +42,7 @@ public class Drivetrain extends TankDrivetrain {
      */
     private static final Supplier<Double> rightCorrection = rootNamespace.addConstantDouble("right correction", RIGHT_CORRECTION);
     private static final Supplier<Double> leftCorrection = rootNamespace.addConstantDouble("left correction", LEFT_CORRECTION);
-    public static final Supplier<Double> rotateSpeed = rootNamespace.addConstantDouble("rotate speed", DEFAUlT_ROTATE_SPEED);
+    public static final Supplier<Double> rotateSpeed = rootNamespace.addConstantDouble("rotate speed", DEFAULT_ROTATE_SPEED);
     public static final Supplier<Double> rotateTolerance = rootNamespace.addConstantDouble("rotate tolerance", DEFAULT_ROTATE_TOLERANCE);
 
     public static Drivetrain getInstance() {
