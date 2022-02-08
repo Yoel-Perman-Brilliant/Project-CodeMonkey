@@ -31,10 +31,10 @@ public class ProgramBase extends SequentialCommandGroup {
     }
 
     protected void turnLeftInSeconds(double seconds) {
-        addCommands(new DriveArcade(drivetrain, 0, Drivetrain.DEFAUlT_ROTATE_SPEED).withTimeout(seconds));
+        addCommands(new DriveArcade(drivetrain, 0, -Drivetrain.DEFAUlT_ROTATE_SPEED).withTimeout(seconds));
     }
 
     protected void turnRightInSeconds(double seconds) {
-        addCommands(new DriveArcade(drivetrain, 0, -Drivetrain.DEFAUlT_ROTATE_SPEED).withTimeout(seconds));
+        addCommands(new DriveArcade(drivetrain, 0, Drivetrain.DEFAUlT_ROTATE_SPEED).withTimeout(seconds));
     }
 }
