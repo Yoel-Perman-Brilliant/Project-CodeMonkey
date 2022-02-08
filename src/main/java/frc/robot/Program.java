@@ -7,8 +7,8 @@ import frc.robot.utils.ProgramBase;
  * <p>
  * {@link  #moveForwardInSeconds(double)} <br>
  * {@link  #moveBackwardInSeconds(double)} <br>
- * {@link  #turnLeftInAngle(double)} <br>
- * {@link  #turnRightInAngle(double)} <br>
+ * {@link  #turnLeftInDegrees(double)} <br>
+ * {@link  #turnRightInDegrees(double)} <br>
  * {@link  #turnLeftInSeconds(double)} <br>
  * {@link  #turnRightInSeconds(double)} <br>
  * </p>
@@ -22,7 +22,6 @@ public class Program extends ProgramBase {
 
     public void writeProgram() {
         moveForwardInSeconds(2); //todo remove this line and start coding
-        turnLeftInAngle(45); //todo remove this line and start coding
+        turnLeftInDegrees(45); //todo remove this line and start coding
     }
 }
-

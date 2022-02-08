@@ -22,11 +22,11 @@ public class ProgramBase extends SequentialCommandGroup {
         addCommands(new DriveArcade(drivetrain, -Drivetrain.DRIVE_SPEED, 0).withTimeout(seconds));
     }
 
-    protected void turnLeftInAngle(double angle) {
+    protected void turnLeftInDegrees(double angle) {
         addCommands(new TurnInAngle(drivetrain, -angle, true));
     }
 
-    protected void turnRightInAngle(double angle) {
+    protected void turnRightInDegrees(double angle) {
         addCommands(new TurnInAngle(drivetrain, angle, false));
     }
 
