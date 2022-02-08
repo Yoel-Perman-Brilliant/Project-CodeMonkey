@@ -20,6 +20,7 @@ import java.util.function.Supplier;
  * <b>All you need to change here is:
  * <li>The <b>type</b> of the gyro </li>
  * <li>The <b>correction</b> for each side of the drivetrain. (if you dont have deviation, put <b>1</b>)</li>
+ * <li>The <b>type</b> of the SpeedControllers, in our case its {@link WPI_TalonSRX}</li>
  */
 public class Drivetrain extends TankDrivetrain {
 
