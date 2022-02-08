@@ -21,7 +21,10 @@ import frc.robot.utils.ProgramBase;
 public class Program extends ProgramBase {
 
     public void writeProgram() {
-        moveForwardInSeconds(2); //todo: remove me
-        turnLeftInAngle(90); //todo: remove me
+        moveForwardInSeconds(1);
+        turnLeftInAngle(45);
+        moveBackwardInSeconds(1);
+        turnRightInSeconds(0.5);
     }
 }
+

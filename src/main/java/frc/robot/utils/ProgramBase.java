@@ -23,11 +23,11 @@ public class ProgramBase extends SequentialCommandGroup {
     }
 
     protected void turnLeftInAngle(double angle) {
-        addCommands(new TurnInAngle(drivetrain, angle, true));
+        addCommands(new TurnInAngle(drivetrain, -angle, true));
     }
 
     protected void turnRightInAngle(double angle) {
-        addCommands(new TurnInAngle(drivetrain, -angle, false));
+        addCommands(new TurnInAngle(drivetrain, angle, false));
     }
 
     protected void turnLeftInSeconds(double seconds) {

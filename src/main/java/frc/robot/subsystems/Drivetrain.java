@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.spikes2212.command.drivetrains.TankDrivetrain;
 import com.spikes2212.dashboard.RootNamespace;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import frc.robot.RobotMap;
 import frc.robot.utils.BustedMotorControllerGroup;
@@ -29,8 +30,8 @@ public class Drivetrain extends TankDrivetrain {
     private final ADXRS450_Gyro gyro = new ADXRS450_Gyro(); //todo change to *your* gyro type
 
     public static final double DRIVE_SPEED = 0.5;
-    public static final double DEFAUlT_ROTATE_SPEED = 0.5;
-    public static final double DEFAULT_ROTATE_TOLERANCE = 4;
+    public static final double DEFAUlT_ROTATE_SPEED = 0.45;
+    public static final double DEFAULT_ROTATE_TOLERANCE = 3;
 
     private static Drivetrain instance;
 

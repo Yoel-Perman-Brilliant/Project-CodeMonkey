@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Drivetrain;
@@ -16,15 +17,16 @@ import frc.robot.subsystems.Drivetrain;
  */
 public class Robot extends TimedRobot {
 
+    private Program program;
+
     /**
      * This function is run when the robot is first started up and should be used for any
      * initialization code.
      */
     @Override
     public void robotInit() {
-        Program program = new Program();
+        program = new Program();
         program.writeProgram();
-        program.schedule();
     }
 
     /**
@@ -56,8 +58,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        // schedule the autonomous command (example)
-
+        program.schedule();
     }
 
     /**

@@ -18,8 +18,8 @@ public class TurnInAngle extends DriveArcade {
 
     private static Supplier<Double> getRotateSpeed(boolean toTheLeft) {
         if (toTheLeft)
-            return Drivetrain.rotateSpeed;
-        return () -> -Drivetrain.rotateSpeed.get();
+            return () -> -Drivetrain.rotateSpeed.get();
+        return Drivetrain.rotateSpeed;
     }
 
     @Override
@@ -31,6 +31,6 @@ public class TurnInAngle extends DriveArcade {
 
     @Override
     public boolean isFinished() {
-        return Math.abs(wantedAngle - drivetrain.getAngle()) < Drivetrain.DEFAULT_ROTATE_TOLERANCE;
+        return Math.abs(wantedAngle - drivetrain.getAngle()) < Drivetrain.rotateTolerance.get();
     }
 }
