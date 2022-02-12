@@ -13,7 +13,6 @@ Based on <a href="https://github.com/Spikes-2212-Programming-Guild/Freshman-Pres
 <li><code>turnRightInDegrees(double degrees)</code></li>
 <li><code>turnLeftInSeconds(double seconds)</code></li>
 <li><code>turnRightInSeconds(double seconds)</code></li>
-</div>
 <span style="color: #0015AB">
 <h2>If you want to use it, you can!</h2>
 </span>
@@ -24,3 +23,4 @@ Based on <a href="https://github.com/Spikes-2212-Programming-Guild/Freshman-Pres
 <br>
 <b>Now, all the user has to do is to write in </b> <code>Program.java</code> <b> the commands that they want the robot
 to perform, and that's it!</b>
+</div>
