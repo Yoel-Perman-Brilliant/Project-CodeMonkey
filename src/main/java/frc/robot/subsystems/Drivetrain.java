@@ -3,11 +3,11 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.spikes2212.command.drivetrains.TankDrivetrain;
 import com.spikes2212.dashboard.RootNamespace;
+import com.spikes2212.util.BustedMotorControllerGroup;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import frc.robot.RobotMap;
-import frc.robot.utils.BustedMotorControllerGroup;
 
 import java.util.function.Supplier;
 
@@ -62,7 +62,7 @@ public class Drivetrain extends TankDrivetrain {
         return instance;
     }
 
-    private Drivetrain(MotorControllerGroup leftMotors, BustedMotorControllerGroup rightMotors) {
+    private Drivetrain(MotorControllerGroup leftMotors, MotorControllerGroup rightMotors) {
         super(leftMotors, rightMotors);
     }
 
