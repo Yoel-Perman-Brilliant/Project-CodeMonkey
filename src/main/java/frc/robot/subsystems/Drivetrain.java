@@ -1,11 +1,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.spikes2212.command.drivetrains.TankDrivetrain;
 import com.spikes2212.dashboard.RootNamespace;
 import com.spikes2212.util.BustedMotorControllerGroup;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import frc.robot.RobotMap;
 
@@ -20,7 +20,7 @@ import java.util.function.Supplier;
  * <b>All you need to change here is:
  * <li>The <b>type</b> of the gyro </li>
  * <li>The <b>correction</b> for each side of the drivetrain. (if you dont have deviation, put <b>1</b>)</li>
- * <li>The <b>type</b> of the SpeedControllers, in our case its {@link WPI_TalonSRX}</li>
+ * <li>The <b>type</b> of the SpeedControllers, in our case its 2 {@link WPI_TalonSRX}s and 2 {@link WPI_VictorSPX}</li>
  */
 public class Drivetrain extends TankDrivetrain {
 
@@ -31,7 +31,7 @@ public class Drivetrain extends TankDrivetrain {
 
     public static final double DRIVE_SPEED = 0.5;
     public static final double DEFAULT_ROTATE_SPEED = 0.45;
-    public static final double DEFAULT_ROTATE_TOLERANCE = 3;
+    public static final double DEFAULT_ROTATE_TOLERANCE = 6;
 
     private static Drivetrain instance;
 
@@ -49,8 +49,8 @@ public class Drivetrain extends TankDrivetrain {
         if (instance == null) {
             instance = new Drivetrain(new BustedMotorControllerGroup(
                     leftCorrection,
-                    new WPI_TalonSRX(RobotMap.CAN.DRIVETRAIN_LEFT_TALON_1),
-                    new WPI_TalonSRX(RobotMap.CAN.DRIVETRAIN_LEFT_TALON_2)
+                    new WPI_VictorSPX(RobotMap.CAN.DRIVETRAIN_LEFT_VICTOR_1),
+                    new WPI_VictorSPX(RobotMap.CAN.DRIVETRAIN_LEFT_VICTOR_2)
             ),
                     new BustedMotorControllerGroup(
                             rightCorrection,
