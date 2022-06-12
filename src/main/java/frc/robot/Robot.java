@@ -18,7 +18,6 @@ import groups.*;
  */
 public class Robot extends TimedRobot {
 
-    private Program program;
     private SendableChooser<Command> chooser;
 
     /**
@@ -47,9 +46,6 @@ public class Robot extends TimedRobot {
         chooser.addOption("Group 7", g7);
         chooser.addOption("Group 8", g8);
         chooser.addOption("Group 9", g9);
-
-        program = new Program();
-        program.writeProgram();
     }
 
     /**
