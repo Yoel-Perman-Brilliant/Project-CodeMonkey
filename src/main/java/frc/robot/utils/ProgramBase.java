@@ -6,7 +6,7 @@ import frc.robot.commands.TurnInAngle;
 import frc.robot.subsystems.Drivetrain;
 
 /**
- * The backhand of {@link Program}.<br>
+ * The backend of student written programs.<br>
  * This class adds commands to a {@link SequentialCommandGroup} according to the user's demand.
  */
 public abstract class ProgramBase extends SequentialCommandGroup {
