@@ -25,7 +25,7 @@ import java.util.function.Supplier;
 public class Drivetrain extends TankDrivetrain {
 
     public static final double RIGHT_CORRECTION = 1; //todo change according to *your* drivetrain deviation
-    public static final double LEFT_CORRECTION = 0.984; //todo change according to *your* drivetrain deviation
+    public static final double LEFT_CORRECTION = 0.9; //todo change according to *your* drivetrain deviation
 
     private final ADXRS450_Gyro gyro = new ADXRS450_Gyro(); //todo change to *your* gyro type
 
