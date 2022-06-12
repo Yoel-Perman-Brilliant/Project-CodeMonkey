@@ -10,7 +10,7 @@ import frc.robot.subsystems.Drivetrain;
  * The backhand of {@link Program}.<br>
  * This class adds commands to a {@link SequentialCommandGroup} according to the user's demand.
  */
-public class ProgramBase extends SequentialCommandGroup {
+public abstract class ProgramBase extends SequentialCommandGroup {
 
     private final Drivetrain drivetrain = Drivetrain.getInstance();
 
@@ -30,11 +30,5 @@ public class ProgramBase extends SequentialCommandGroup {
         addCommands(new TurnInAngle(drivetrain, angle, false));
     }
 
-    protected void turnLeftInSeconds(double seconds) {
-        addCommands(new DriveArcade(drivetrain, 0, -Drivetrain.DEFAULT_ROTATE_SPEED).withTimeout(seconds));
-    }
-
-    protected void turnRightInSeconds(double seconds) {
-        addCommands(new DriveArcade(drivetrain, 0, Drivetrain.DEFAULT_ROTATE_SPEED).withTimeout(seconds));
-    }
+    protected abstract void writeProgram();
 }

@@ -9,8 +9,6 @@ import frc.robot.utils.ProgramBase;
  * {@link  #moveBackwardInSeconds(double)} <br>
  * {@link  #turnLeftInDegrees(double)} <br>
  * {@link  #turnRightInDegrees(double)} <br>
- * {@link  #turnLeftInSeconds(double)} <br>
- * {@link  #turnRightInSeconds(double)} <br>
  * </p>
  * <p>
  * In the basic program below, the robot will <b>drive forward</b> for 2 seconds, and then <b>turn left</b> by 90 degrees<br>
@@ -20,6 +18,7 @@ import frc.robot.utils.ProgramBase;
  */
 public class Program extends ProgramBase {
 
+    @Override
     public void writeProgram() {
         moveForwardInSeconds(2); //todo remove this line and start coding
         turnLeftInDegrees(90); //todo remove this line and start coding
