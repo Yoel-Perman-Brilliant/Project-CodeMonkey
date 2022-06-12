@@ -32,13 +32,14 @@ public class Robot extends TimedRobot {
         Group5 g5 = new Group5();
         Group6 g6 = new Group6();
 
-        chooser = new AutoChooser(g1, "Group 1");
-
-        chooser.addOption("Group 2", g2);
-        chooser.addOption("Group 3", g3);
-        chooser.addOption("Group 4", g4);
-        chooser.addOption("Group 5", g5);
-        chooser.addOption("Group 6", g6);
+        chooser = new AutoChooser(
+                g1, "Group 1",
+                g2, "Group 2",
+                g3, "Group 3",
+                g4, "Group 4",
+                g5, "Group 5",
+                g6, "Group 6"
+        );
     }
 
     /**
