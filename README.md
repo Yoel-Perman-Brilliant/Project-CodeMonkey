@@ -10,8 +10,6 @@ The kids learn to code basic Java programs by calling the prewritten functions l
 <li><code>moveBackwardInSeconds(double seconds)</code></li>
 <li><code>turnLeftInDegrees(double degrees)</code></li>
 <li><code>turnRightInDegrees(double degrees)</code></li>
-<li><code>turnLeftInSeconds(double seconds)</code></li>
-<li><code>turnRightInSeconds(double seconds)</code></li>
 
 <h2>If you want to use it, you can!</h2>
 <h3>All you have to do is:</h3>
