@@ -30,5 +30,5 @@ public abstract class ProgramBase extends SequentialCommandGroup {
         addCommands(new TurnInAngle(drivetrain, angle, false));
     }
 
-    protected abstract void writeProgram();
+    public abstract void writeProgram();
 }
