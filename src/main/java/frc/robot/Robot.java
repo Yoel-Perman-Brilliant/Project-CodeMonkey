@@ -4,9 +4,13 @@
 
 package frc.robot;
 
+import com.spikes2212.dashboard.RootNamespace;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.utils.ProgramBase;
 import groups.*;
+
+import javax.swing.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -17,6 +21,7 @@ import groups.*;
 public class Robot extends TimedRobot {
 
     private AutoChooser chooser;
+    private RootNamespace root = new RootNamespace("athena");
 
     /**
      * This function is run when the robot is first started up and should be used for any
@@ -24,7 +29,6 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
-
         Group1 g1 = new Group1();
         Group2 g2 = new Group2();
         Group3 g3 = new Group3();
@@ -40,6 +44,7 @@ public class Robot extends TimedRobot {
                 g5, "Group 5",
                 g6, "Group 6"
         );
+        root.putData("athena chooser", chooser);
     }
 
     /**
@@ -63,7 +68,6 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void disabledInit() {
-
     }
 
     @Override
@@ -72,7 +76,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        chooser.schedule();
+        ProgramBase program = (ProgramBase) chooser.getSelected();
+        program.writeProgram();
+        program.schedule();
     }
 
     /**
