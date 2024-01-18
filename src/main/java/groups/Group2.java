@@ -2,6 +2,7 @@ package groups;
 
 import frc.robot.utils.ProgramBase;
 
+
 /**
  * <H2>Here you should write your program</H2>you can use the methods: <br>
  * <p>{@link  #moveForwardInSeconds(double)} <br>
@@ -18,7 +19,6 @@ public class Group2 extends ProgramBase {
 
     @Override
     public void writeProgram() {
-        moveForwardInSeconds(2); //todo remove this line and start coding
-        turnLeftInSeconds(1); //todo remove this line and start coding
+       turnLeftInSeconds(15);
     }
 }
