@@ -29,5 +29,13 @@ public abstract class ProgramBase extends SequentialCommandGroup {
         addCommands(new TurnInAngle(drivetrain, angle, false));
     }
 
+    protected void turnLeftInSeconds(double seconds) {
+        addCommands(new DriveArcade(drivetrain, 0, Drivetrain.DEFAULT_ROTATE_SPEED).withTimeout(seconds));
+    }
+
+    protected void turnRightInSeconds(double seconds) {
+        addCommands(new DriveArcade(drivetrain, 0, -Drivetrain.DEFAULT_ROTATE_SPEED).withTimeout(seconds));
+    }
+
     public abstract void writeProgram();
 }

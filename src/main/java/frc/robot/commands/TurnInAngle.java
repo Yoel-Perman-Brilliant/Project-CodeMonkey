@@ -17,7 +17,7 @@ public class TurnInAngle extends DriveArcade {
     }
 
     private static Supplier<Double> getRotateSpeed(boolean toTheLeft) {
-        if (!toTheLeft)
+        if (toTheLeft)
             return () -> -Drivetrain.rotateSpeed.get();
         return Drivetrain.rotateSpeed;
     }
