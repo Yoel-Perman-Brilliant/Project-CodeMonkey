@@ -26,5 +26,8 @@ public class Group3 extends ProgramBase {
         moveForwardInSeconds(3);
         turnRightInSeconds(2.8);
         moveForwardInSeconds(0.4);
+        turnRightInSeconds(0.5);
+        moveForwardInSeconds(0.4);
+
     }
 }
