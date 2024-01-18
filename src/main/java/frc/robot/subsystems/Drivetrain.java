@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.spikes2212.command.drivetrains.TankDrivetrain;
 import com.spikes2212.dashboard.RootNamespace;
 import com.spikes2212.util.BustedMotorControllerGroup;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.ADIS16448_IMU;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import frc.robot.RobotMap;
 
@@ -27,7 +27,7 @@ public class Drivetrain extends TankDrivetrain {
     public static final double RIGHT_CORRECTION = 1; //todo change according to *your* drivetrain deviation
     public static final double LEFT_CORRECTION = 0.9; //todo change according to *your* drivetrain deviation
 
-    private final ADXRS450_Gyro gyro = new ADXRS450_Gyro(); //todo change to *your* gyro type
+    private final ADIS16448_IMU gyro = new ADIS16448_IMU(); //todo change to *your* gyro type
 
     public static final double DRIVE_SPEED = 0.5;
     public static final double DEFAULT_ROTATE_SPEED = 0.45;
@@ -49,13 +49,13 @@ public class Drivetrain extends TankDrivetrain {
         if (instance == null) {
             instance = new Drivetrain(new BustedMotorControllerGroup(
                     leftCorrection,
-                    new WPI_VictorSPX(RobotMap.CAN.DRIVETRAIN_LEFT_VICTOR_1),
-                    new WPI_VictorSPX(RobotMap.CAN.DRIVETRAIN_LEFT_VICTOR_2)
+                    new WPI_TalonSRX(RobotMap.CAN.DRIVETRAIN_LEFT_TALON_1),
+                    new WPI_TalonSRX(RobotMap.CAN.DRIVETRAIN_LEFT_TALON_2)
             ),
                     new BustedMotorControllerGroup(
                             rightCorrection,
                             new WPI_TalonSRX(RobotMap.CAN.DRIVETRAIN_RIGHT_TALON_1),
-                            new WPI_TalonSRX(RobotMap.CAN.DRIVETRAIN_RIGHT_TALON_2)
+                            new WPI_VictorSPX(RobotMap.CAN.DRIVETRAIN_RIGHT_VICTOR_2)
                     )
             );
         }

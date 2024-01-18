@@ -76,7 +76,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        ProgramBase program = (ProgramBase) chooser.getSelected();
+        ProgramBase program = new Group1();
         program.writeProgram();
         program.schedule();
     }
