@@ -6,6 +6,7 @@ import frc.robot.subsystems.Drivetrain;
 import java.util.function.Supplier;
 
 public class TurnInAngle extends DriveArcade {
+
     private final Drivetrain drivetrain;
     private final double angle;
     private double wantedAngle;
@@ -17,7 +18,7 @@ public class TurnInAngle extends DriveArcade {
     }
 
     private static Supplier<Double> getRotateSpeed(boolean toTheLeft) {
-        if (toTheLeft)
+        if (!toTheLeft)
             return () -> -Drivetrain.rotateSpeed.get();
         return Drivetrain.rotateSpeed;
     }

@@ -7,6 +7,7 @@ package frc.robot;
 import com.spikes2212.dashboard.RootNamespace;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.Drivetrain;
 import frc.robot.utils.ProgramBase;
 import groups.*;
 
@@ -76,7 +77,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        ProgramBase program = (ProgramBase) chooser.getSelected();
+        Drivetrain.getInstance().resetGyro();
+        ProgramBase program = new Group1();
         program.writeProgram();
         program.schedule();
     }

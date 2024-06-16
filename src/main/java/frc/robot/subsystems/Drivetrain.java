@@ -2,35 +2,26 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
 import com.spikes2212.command.drivetrains.TankDrivetrain;
 import com.spikes2212.dashboard.RootNamespace;
-import com.spikes2212.util.BustedMotorControllerGroup;
+import com.spikes2212.util.MotorControllerGroup;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.SerialPort;
 import frc.robot.RobotMap;
 
 import java.util.function.Supplier;
 
-/**
- * <h2>The drivetrain we want to move.</h2>
- * <p>
- * While the {@link  TankDrivetrain} does most of the work, this class adds the gyro and uses the
- * {@link BustedMotorControllerGroup} to fix deviation
- * </p><br>
- * <b>All you need to change here is:
- * <li>The <b>type</b> of the gyro </li>
- * <li>The <b>correction</b> for each side of the drivetrain. (if you dont have deviation, put <b>1</b>)</li>
- * <li>The <b>type</b> of the SpeedControllers, in our case its 2 {@link WPI_TalonSRX}s and 2 {@link WPI_VictorSPX}</li>
- */
 public class Drivetrain extends TankDrivetrain {
 
     public static final double RIGHT_CORRECTION = 1; //todo change according to *your* drivetrain deviation
     public static final double LEFT_CORRECTION = 0.9; //todo change according to *your* drivetrain deviation
 
-    private final ADXRS450_Gyro gyro = new ADXRS450_Gyro(); //todo change to *your* gyro type
+    private final AHRS gyro = new AHRS(SerialPort.Port.kMXP); //todo change to *your* gyro type
 
-    public static final double DRIVE_SPEED = 0.5;
-    public static final double DEFAULT_ROTATE_SPEED = 0.45;
+    public static final double DRIVE_SPEED = 0.25;
+    public static final double DEFAULT_ROTATE_SPEED = 0.25;
     public static final double DEFAULT_ROTATE_TOLERANCE = 6;
 
     private static Drivetrain instance;
@@ -47,13 +38,11 @@ public class Drivetrain extends TankDrivetrain {
 
     public static Drivetrain getInstance() {
         if (instance == null) {
-            instance = new Drivetrain(new BustedMotorControllerGroup(
-                    leftCorrection,
+            instance = new Drivetrain(new MotorControllerGroup(
                     new WPI_VictorSPX(RobotMap.CAN.DRIVETRAIN_LEFT_VICTOR_1),
-                    new WPI_VictorSPX(RobotMap.CAN.DRIVETRAIN_LEFT_VICTOR_2)
+                    new WPI_TalonSRX(RobotMap.CAN.DRIVETRAIN_LEFT_VICTOR_2)
             ),
-                    new BustedMotorControllerGroup(
-                            rightCorrection,
+                    new MotorControllerGroup(
                             new WPI_TalonSRX(RobotMap.CAN.DRIVETRAIN_RIGHT_TALON_1),
                             new WPI_TalonSRX(RobotMap.CAN.DRIVETRAIN_RIGHT_TALON_2)
                     )
@@ -64,6 +53,7 @@ public class Drivetrain extends TankDrivetrain {
 
     private Drivetrain(MotorControllerGroup leftMotors, MotorControllerGroup rightMotors) {
         super(leftMotors, rightMotors);
+        namespace.putNumber("gyro angle", this::getAngle);
     }
 
     public void resetGyro() {
