@@ -21,7 +21,7 @@ public class Drivetrain extends TankDrivetrain {
     private final AHRS gyro = new AHRS(SerialPort.Port.kMXP); //todo change to *your* gyro type
 
     public static final double DRIVE_SPEED = 0.25;
-    public static final double DEFAULT_ROTATE_SPEED = 0.25;
+    public static final double DEFAULT_ROTATE_SPEED = 0.2;
     public static final double DEFAULT_ROTATE_TOLERANCE = 6;
 
     private static Drivetrain instance;
