@@ -1,5 +1,6 @@
 package groups;
 
+import frc.robot.commands.TurnInAngle;
 import frc.robot.utils.ProgramBase;
 
 /**
@@ -18,7 +19,14 @@ public class Group3 extends ProgramBase {
 
     @Override
     public void writeProgram() {
-        moveForwardInSeconds(2); //todo remove this line and start coding
-        turnLeftInDegrees(90); //todo remove this line and start coding
+        moveForwardInSeconds(2.5);
+        turnRightInDegrees(90);
+        moveForwardInSeconds(1) ;
+        turnLeftInDegrees(90);
+        moveForwardInSeconds(1);
+
+
+
     }
+
 }
