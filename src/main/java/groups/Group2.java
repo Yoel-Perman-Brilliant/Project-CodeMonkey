@@ -18,11 +18,11 @@ import frc.robot.utils.ProgramBase;
 public class Group2 extends ProgramBase {
 
     @Override
-    public void writeProgram() {
-        moveForwardInSeconds(2); //todo remove this line and start coding
-        turnLeftInDegrees(90); //todo remove this line and start coding
-        moveBackwardInSeconds (6);
-        turnRightInDegrees(5);
-        turnLeftInDegrees(4);
+    public void writeProgram(){
+        moveForwardInSeconds(8);
+        turnRightInDegrees(90);
+        moveForwardInSeconds(6);
+        turnLeftInDegrees(90);
+        moveForwardInSeconds(3);
     }
 }
