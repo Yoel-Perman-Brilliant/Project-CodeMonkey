@@ -78,7 +78,7 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
         Drivetrain.getInstance().resetGyro();
-        ProgramBase program = new Group2();
+        ProgramBase program = new Group1();
         program.writeProgram();
         program.schedule();
     }
